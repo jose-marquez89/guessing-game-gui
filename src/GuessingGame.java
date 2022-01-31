@@ -24,12 +24,13 @@ public class GuessingGame extends JFrame {
 		int guess = Integer.parseInt(guessText);
 		
 		if (guess < theNumber)
-			message = guess + " is too low. Try again."; 
+			message = guess + " is too low. Try again. Hint: " + theNumber; 
 		else if (guess > theNumber)
-			message = guess + " is too high. Try again.";
-		else
+			message = guess + " is too high. Try again. Hint: " + theNumber;
+		else {
 			message = guess + " is correct. You won this round, let's play again!";
 			newGame();
+		}
 		labelOutput.setText(message);
 	}
 	
