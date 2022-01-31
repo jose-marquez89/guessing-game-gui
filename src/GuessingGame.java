@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 // TODO Add error handling
-// TODO Remove old guesses
 
 public class GuessingGame extends JFrame {
 	private JTextField playerGuessField;
@@ -18,20 +17,21 @@ public class GuessingGame extends JFrame {
 	private int theNumber;
 	
 	public void checkGuess() {
-		// TODO something is wrong with this flow
 		String guessText = playerGuessField.getText();
 		String message = "";
 		int guess = Integer.parseInt(guessText);
 		
 		if (guess < theNumber)
-			message = guess + " is too low. Try again. Hint: " + theNumber; 
+			message = guess + " is too low. Try again."; 
 		else if (guess > theNumber)
-			message = guess + " is too high. Try again. Hint: " + theNumber;
+			message = guess + " is too high. Try again.";
 		else {
 			message = guess + " is correct. You won this round, let's play again!";
 			newGame();
 		}
 		labelOutput.setText(message);
+		playerGuessField.requestFocus();
+		playerGuessField.selectAll();
 	}
 	
 	public void newGame() {
