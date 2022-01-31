@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-// TODO Add error handling
 
 public class GuessingGame extends JFrame {
 	private JTextField playerGuessField;
@@ -19,19 +18,24 @@ public class GuessingGame extends JFrame {
 	public void checkGuess() {
 		String guessText = playerGuessField.getText();
 		String message = "";
-		int guess = Integer.parseInt(guessText);
+		try {
+			int guess = Integer.parseInt(guessText);
 		
-		if (guess < theNumber)
-			message = guess + " is too low. Try again."; 
-		else if (guess > theNumber)
-			message = guess + " is too high. Try again.";
-		else {
-			message = guess + " is correct. You won this round, let's play again!";
-			newGame();
+			if (guess < theNumber)
+				message = guess + " is too low. Try again."; 
+			else if (guess > theNumber)
+				message = guess + " is too high. Try again.";
+			else {
+				message = guess + " is correct. You won this round, let's play again!";
+				newGame();
+			}
+		} catch (Exception e) {
+			message = "That wasn't a number! Enter a whole number!";
+		} finally {
+			labelOutput.setText(message);
+			playerGuessField.requestFocus();
+			playerGuessField.selectAll();
 		}
-		labelOutput.setText(message);
-		playerGuessField.requestFocus();
-		playerGuessField.selectAll();
 	}
 	
 	public void newGame() {
